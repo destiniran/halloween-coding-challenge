@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halloween CSS</title>
     <link rel="stylesheet" href="haunted-harvest.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -54,32 +57,73 @@
                 <span class="ship-flag">🏴‍☠️</span>
             </div>
 
-            <a href="#pirate-battle" class="battle-banner" aria-label="Enter the pirate battle scene">
+            <a href="#pirate-battle" class="battle-banner" aria-label="Enter Skulltide Showdown">
                 <div class="banner-row banner-row-top">
-                    <div class="banner-track">☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️</div>
-                    <div class="banner-track">☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️</div>
+                    <div class="skull-strip">
+                        <div class="skull-track">☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️</div>
+                        <div class="skull-track">☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️</div>
+                    </div>
                 </div>
 
                 <div class="banner-center">
                     <p class="battle-kicker">Broadsides ready for</p>
                     <h2>Skulltide Showdown</h2>
-                    <p class="battle-enter">Click to enter battle</p>
+                    <span class="battle-enter">Enter the Battle</span>
                 </div>
 
                 <div class="banner-row banner-row-bottom">
-                    <div class="banner-track">☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️</div>
-                    <div class="banner-track">☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️</div>
+                    <div class="skull-strip">
+                        <div class="skull-track">☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️</div>
+                        <div class="skull-track">☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️</div>
+                    </div>
                 </div>
             </a>
 
         </section>
 
         <section class="scene pirate-battle-scene" id="pirate-battle">
-            <div class="battle-placeholder">
-                <h2>Skulltide Showdown</h2>
-                <p>Pirate battle scene coming next.</p>
-                <a href="#beach" class="back-link">Back to Beach</a>
+
+            <div class="battle-reveal" aria-hidden="true">
+                <div class="reveal-skulls">☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️</div>
+                <p>Skulltide Showdown</p>
+                <div class="reveal-skulls">☠️ ☠️ ☠️ ☠️ ☠️ ☠️ ☠️</div>
             </div>
+
+            <a href="#beach" class="back-link">Back to Beach</a>
+
+            <div class="ship-deck">
+                <div class="deck-title">Skulltide Showdown</div>
+
+                <div class="battle-pair pair-one">
+                    <span class="fighter human h1">🧔‍♂️</span>
+                    <span class="fighter skeleton sk1">💀</span>
+                </div>
+
+                <div class="battle-pair pair-two">
+                    <span class="fighter human h2">👨‍🦰</span>
+                    <span class="fighter skeleton sk2">💀</span>
+                </div>
+
+                <div class="battle-pair pair-three">
+                    <span class="fighter human h3">👩‍🦱</span>
+                    <span class="fighter skeleton sk3">💀</span>
+                    <span class="effect dodge-mark">❗</span>
+                </div>
+
+                <div class="battle-pair pair-four">
+                    <span class="fighter human h4">👨‍🦳</span>
+                    <span class="fighter skeleton sk4">💀</span>
+                    <span class="effect defeat-mark">💥</span>
+                </div>
+
+                <div class="battle-pair pair-five">
+                    <span class="fighter human h5">👩‍🦰</span>
+                    <span class="fighter skeleton sk5">💀</span>
+                    <span class="effect clash-five">💥</span>
+                </div>
+
+            </div>
+
         </section>
 
     </main>

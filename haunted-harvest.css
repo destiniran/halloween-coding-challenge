@@ -16,7 +16,7 @@ body {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -411,8 +411,6 @@ body {
   to { transform: translateY(9px) rotate(4deg); }
 }
 
-
-
 /* pirate transition */
 .pirate-transition-scene,
 .pirate-battle-scene {
@@ -456,20 +454,20 @@ body {
 .approach-left {
   left: 18%;
   --ship-flip: -1;
-  animation: approachLeft 1.2s ease-in forwards, shipLeftRock 8s ease-in-out infinite;
+  animation: approachLeft 1.2s ease-in forwards;
 }
 
 .approach-right {
   right: 18%;
   --ship-flip: 1;
-  animation: approachRight 1.2s ease-in forwards, shipRightRock 8s ease-in-out infinite;
+  animation: approachRight 1.2s ease-in forwards;
 }
 
 .approach-ship .ship-body {
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translateX(-50%) scaleX(var(--ship-flip, 1));
+  transform: translateX(-50%) scaleX(var(--ship-flip));
   font-size: clamp(2.8rem, 4vw, 4rem);
 }
 
@@ -501,54 +499,23 @@ body {
   padding: 1rem 0;
   text-decoration: none;
   color: var(--ghost-white);
-  background: rgba(12, 5, 20, 0.92);
+  background: rgba(12, 5, 20, 0.82);
   opacity: 0;
-  animation: bannerReveal 2.2s ease forwards;
-  animation-delay: 1.1s;
+  animation: bannerReveal 1.4s ease 1.05s forwards;
 }
 
 @keyframes bannerReveal {
-  0% {
-    opacity: 0;
-    transform: scale(1.03);
-  }
-  40% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .banner-row {
-  display: flex;
-  width: 200%;
-  gap: 2rem;
+  width: 100%;
+  overflow: hidden;
   white-space: nowrap;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  line-height: 1;
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
   color: var(--pumpkin);
   text-shadow: 0 0 10px rgba(255, 214, 10, 0.35);
-  overflow: hidden;
-}
-
-.banner-track {
-  display: flex;
-  gap: 2rem;
-  min-width: max-content;
-  animation-duration: 8s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-.banner-row-top .banner-track {
-  animation-name: skullLeft;
-}
-
-.banner-row-bottom .banner-track {
-  animation-name: skullRight;
 }
 
 .banner-row-top {
@@ -559,14 +526,33 @@ body {
   transform: rotate(2deg);
 }
 
+.skull-strip {
+  display: flex;
+  width: max-content;
+}
+
+.skull-track {
+  flex: none;
+  padding-right: 1.4rem;
+  word-spacing: 1rem;
+}
+
+.banner-row-top .skull-strip {
+  animation: skullLeft 9s linear infinite;
+}
+
+.banner-row-bottom .skull-strip {
+  animation: skullRight 9s linear infinite;
+}
+
 @keyframes skullLeft {
-  from { transform: translateX(0) rotate(-3deg); }
-  to { transform: translateX(-50%) rotate(3deg); }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 @keyframes skullRight {
-  from { transform: translateX(-50%) rotate(3deg); }
-  to { transform: translateX(0) rotate(-3deg); }
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
 }
 
 .banner-center {
@@ -574,113 +560,401 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  text-align: center;
   padding: 0 1.5rem;
+  text-align: center;
 }
 
 .battle-kicker {
   margin: 0;
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--candle-glow);
 }
 
+.banner-center h2,
+.deck-title,
+.battle-reveal p {
+  font-family: "Creepster", cursive;
+  letter-spacing: 0.05em;
+}
+
 .banner-center h2 {
   margin: 0;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  font-weight: normal;
   color: var(--ghost-white);
-  text-shadow: 0 0 16px rgba(90, 24, 154, 0.8);
+  text-shadow: 0 0 18px rgba(90, 24, 154, 0.9);
 }
 
 .battle-enter {
-  margin: 0;
-  padding: 0.6rem 1rem;
+  padding: 0.65rem 1.1rem;
   border: 2px solid var(--pumpkin);
   border-radius: 999px;
-  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
   color: var(--ghost-white);
-  background: rgba(255, 117, 24, 0.15);
+  background: rgba(255, 117, 24, 0.16);
 }
 
+/* battle deck */
 .pirate-battle-scene {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #2d160b;
+}
+
+.ship-deck {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
   background:
-    linear-gradient(
-      to bottom,
-      #12081f 0%,
-      #24123c 33.333%,
-      #18496d 33.333%,
-      #18496d 66.666%,
-      #d6b57a 66.666%,
-      #d6b57a 100%
+    repeating-linear-gradient(
+      0deg,
+      #8a542d 0 54px,
+      #5f351c 54px 58px
     );
+  box-shadow: inset 0 0 90px rgba(20, 7, 3, 0.65);
 }
 
-.battle-placeholder {
-  text-align: center;
-  color: var(--ghost-white);
-  padding: 2rem;
-  background: rgba(12, 5, 20, 0.8);
-  border: 3px solid var(--pumpkin);
-  border-radius: 20px;
+.ship-deck::before,
+.ship-deck::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  z-index: 2;
+  background: #4a2814;
+  border: 4px solid #2d160b;
+  box-sizing: border-box;
 }
 
-.battle-placeholder h2,
-.battle-placeholder p {
-  margin: 0 0 1rem;
+.ship-deck::before {
+  top: 7%;
+}
+
+.ship-deck::after {
+  bottom: 7%;
+}
+
+.deck-title {
+  position: absolute;
+  top: 1.3%;
+  left: 50%;
+  z-index: 4;
+  transform: translateX(-50%);
+  font-size: clamp(1.7rem, 3vw, 2.7rem);
+  color: var(--candle-glow);
+  text-shadow: 2px 2px 0 #2d160b;
+  white-space: nowrap;
 }
 
 .back-link {
-  display: inline-block;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 30;
   padding: 0.65rem 1rem;
-  border-radius: 999px;
-  background: rgba(255, 117, 24, 0.2);
   border: 2px solid var(--candle-glow);
+  border-radius: 999px;
+  font-family: "Poppins", Arial, sans-serif;
   color: var(--ghost-white);
+  background: rgba(26, 20, 35, 0.9);
   text-decoration: none;
 }
 
-@media (max-width: 700px) {
-  .approach-left {
-    left: 10%;
-    top: 49%;
-  }
+.back-link:hover,
+.back-link:focus {
+  border-color: var(--pumpkin);
+  outline: 3px solid var(--ghost-white);
+  outline-offset: 3px;
+}
 
-  .approach-right {
-    right: 10%;
-    top: 49%;
-  }
+.battle-pair {
+  position: absolute;
+  width: 38%;
+  height: 22%;
+  z-index: 8;
+}
 
-  .approach-ship .ship-flag {
-    bottom: 2.7rem;
-  }
+.fighter {
+  position: absolute;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+}
 
-  @keyframes approachLeft {
-    from { left: 10%; }
-    to { left: 24%; }
-  }
+.effect {
+  position: absolute;
+  opacity: 0;
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+}
 
-  @keyframes approachRight {
-    from { right: 10%; }
-    to { right: 24%; }
-  }
+/* chase */
+.pair-one {
+  left: 6%;
+  top: 15%;
+}
 
-  .battle-banner {
-    padding: 0.75rem 0;
-  }
+.h1 {
+  left: 10%;
+  top: 40%;
+  animation: humanChase 8s linear infinite;
+}
 
-  .banner-row {
-    gap: 1.25rem;
-  }
+.sk1 {
+  left: 2%;
+  top: 40%;
+  animation: skeletonChase 8s linear infinite;
+}
 
-  .banner-track {
-    gap: 1.25rem;
+@keyframes humanChase {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(10vw, -5vh); }
+  40% { transform: translate(20vw, -1vh); }
+  60% { transform: translate(18vw, 7vh); }
+  80% { transform: translate(6vw, 8vh); }
+}
+
+@keyframes skeletonChase {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(9vw, -4vh); }
+  40% { transform: translate(19vw, -1vh); }
+  60% { transform: translate(18vw, 6vh); }
+  80% { transform: translate(6vw, 7vh); }
+}
+
+/* circle */
+.pair-two {
+  right: 6%;
+  top: 16%;
+}
+
+.h2 {
+  left: 12%;
+  top: 40%;
+  animation: humanCircle 9s linear infinite;
+}
+
+.sk2 {
+  right: 12%;
+  top: 40%;
+  animation: skeletonCircle 9s linear infinite;
+}
+
+@keyframes humanCircle {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(7vw, -7vh); }
+  50% { transform: translate(14vw, -3vh); }
+  75% { transform: translate(7vw, 7vh); }
+}
+
+@keyframes skeletonCircle {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-7vw, 7vh); }
+  50% { transform: translate(-14vw, 3vh); }
+  75% { transform: translate(-7vw, -7vh); }
+}
+
+/* lunge and dodge */
+.pair-three {
+  left: 23%;
+  top: 41%;
+  width: 54%;
+}
+
+.h3 {
+  left: 25%;
+  top: 40%;
+  animation: humanDodge 8s ease-in-out infinite;
+}
+
+.sk3 {
+  right: 15%;
+  top: 40%;
+  animation: skeletonLunge 8s ease-in-out infinite;
+}
+
+.dodge-mark {
+  left: 28%;
+  top: 20%;
+  animation: dodgeMark 8s ease-in-out infinite;
+}
+
+@keyframes humanDodge {
+  0%, 36%, 100% { transform: translate(0, 0); }
+  44% { transform: translate(2vw, -9vh); }
+  56% { transform: translate(2vw, -9vh); }
+  72% { transform: translate(0, 0); }
+}
+
+@keyframes skeletonLunge {
+  0%, 34%, 100% { transform: translate(0, 0); }
+  46% { transform: translate(-28vw, 0); }
+  56% { transform: translate(-30vw, 1vh); }
+  72% { transform: translate(-8vw, 1vh); }
+}
+
+@keyframes dodgeMark {
+  0%, 32%, 58%, 100% { opacity: 0; }
+  38%, 48% { opacity: 1; transform: scale(1.35); }
+}
+
+/* defeat */
+.pair-four {
+  left: 7%;
+  bottom: 11%;
+  width: 42%;
+}
+
+.h4 {
+  left: 7%;
+  top: 35%;
+  animation: humanDefeat 5s ease-in-out 1 forwards;
+}
+
+.sk4 {
+  right: 4%;
+  top: 30%;
+  animation:
+    skeletonWinMove 5s ease-in-out 1 forwards,
+    winnerJump 0.65s ease-in-out 4.2s infinite alternate;
+}
+
+.defeat-mark {
+  left: 50%;
+  top: 50%;
+  animation: defeatFlash 5s ease-in-out 1 forwards;
+}
+
+@keyframes humanDefeat {
+  0%, 25% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  48% {
+    transform: translate(12vw, 1vh) rotate(0deg);
+  }
+  62% {
+    transform: translate(14vw, 5vh) rotate(80deg);
+  }
+  100% {
+    transform: translate(14vw, 7vh) rotate(90deg);
+    opacity: 0.72;
   }
 }
 
+@keyframes skeletonWinMove {
+  0%, 30% { transform: translate(0, 0); }
+  55% { transform: translate(-13vw, 1vh); }
+  72% { transform: translate(-21vw, 2vh); }
+  100% { transform: translate(-21vw, 2vh); }
+}
+
+@keyframes defeatFlash {
+  0%, 48% { opacity: 0; }
+  55% { opacity: 1; transform: scale(1.3); }
+  65%, 100% { opacity: 0; }
+}
+
+@keyframes winnerJump {
+  from { margin-top: 0; }
+  to { margin-top: -24px; }
+}
+
+/* circle and clash */
+.pair-five {
+  right: 6%;
+  bottom: 12%;
+  width: 42%;
+}
+
+.h5 {
+  left: 10%;
+  top: 38%;
+  animation: clashHumanCircle 9s linear infinite;
+}
+
+.sk5 {
+  right: 10%;
+  top: 38%;
+  animation: clashSkeletonCircle 9s linear infinite;
+}
+
+.clash-five {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: clashFlash 9s ease-in-out infinite;
+}
+
+@keyframes clashHumanCircle {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(8vw, -6vh); }
+  35% { transform: translate(16vw, 0); }
+  50% { transform: translate(11vw, 7vh); }
+  70% { transform: translate(16vw, 0); }
+  85% { transform: translate(6vw, -5vh); }
+}
+
+@keyframes clashSkeletonCircle {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-8vw, 6vh); }
+  35% { transform: translate(-16vw, 0); }
+  50% { transform: translate(-11vw, -7vh); }
+  70% { transform: translate(-16vw, 0); }
+  85% { transform: translate(-6vw, 5vh); }
+}
+
+@keyframes clashFlash {
+  0%, 30%, 40%, 65%, 75%, 100% {
+    opacity: 0;
+  }
+  35%, 70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+}
+
+/* reveal */
+.battle-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--ghost-white);
+  background: rgba(12, 5, 20, 0.96);
+  animation: revealBattle 1.5s ease 0.2s forwards;
+  pointer-events: none;
+}
+
+.battle-reveal p {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 5rem);
+  color: var(--ghost-white);
+  text-shadow: 0 0 18px rgba(90, 24, 154, 0.9);
+}
+
+.reveal-skulls {
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  word-spacing: 0.8rem;
+  color: var(--pumpkin);
+}
+
+@keyframes revealBattle {
+  0%, 35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* mobile */
 @media (max-width: 700px) {
   .pirate-left {
     left: 10%;
@@ -714,65 +988,94 @@ body {
     right: 10%;
   }
 
+  .approach-left {
+    left: 10%;
+    top: 49%;
+  }
+
+  .approach-right {
+    right: 10%;
+    top: 49%;
+  }
+
+  @keyframes approachLeft {
+    from { left: 10%; }
+    to { left: 24%; }
+  }
+
+  @keyframes approachRight {
+    from { right: 10%; }
+    to { right: 24%; }
+  }
+
+  .banner-row {
+    font-size: 1.65rem;
+  }
+
+  .deck-title {
+    top: 1.7%;
+    font-size: 1.45rem;
+  }
+
+  .back-link {
+    top: auto;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.55rem 0.8rem;
+    white-space: nowrap;
+  }
+
+  .fighter {
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+  }
+
+  .battle-pair {
+    width: 45%;
+    height: 20%;
+  }
+
+  .pair-one {
+    left: 3%;
+  }
+
+  .pair-two {
+    right: 3%;
+  }
+
+  .pair-three {
+    left: 12%;
+    width: 76%;
+  }
+
+  .pair-four {
+    left: 3%;
+    width: 47%;
+  }
+
+  .pair-five {
+    right: 3%;
+    width: 47%;
+  }
+
   @keyframes cannonLeft {
-    0% {
-      transform: translate(0, 0);
-      opacity: 0;
-    }
-    5% {
-      transform: translate(0, 0);
-      opacity: 1;
-    }
-    14% {
-      transform: translate(11vw, -27px);
-      opacity: 1;
-    }
-    24% {
-      transform: translate(22vw, -48px);
-      opacity: 1;
-    }
-    33% {
-      transform: translate(32vw, -29px);
-      opacity: 1;
-    }
-    38% {
-      transform: translate(42vw, 0);
-      opacity: 1;
-    }
-    41%, 100% {
-      transform: translate(42vw, 0);
-      opacity: 0;
-    }
+    0% { transform: translate(0, 0); opacity: 0; }
+    5% { transform: translate(0, 0); opacity: 1; }
+    14% { transform: translate(11vw, -27px); opacity: 1; }
+    24% { transform: translate(22vw, -48px); opacity: 1; }
+    33% { transform: translate(32vw, -29px); opacity: 1; }
+    38% { transform: translate(42vw, 0); opacity: 1; }
+    41%, 100% { transform: translate(42vw, 0); opacity: 0; }
   }
 
   @keyframes cannonRight {
-    0% {
-      transform: translate(0, 0);
-      opacity: 0;
-    }
-    5% {
-      transform: translate(0, 0);
-      opacity: 1;
-    }
-    14% {
-      transform: translate(-11vw, -27px);
-      opacity: 1;
-    }
-    24% {
-      transform: translate(-22vw, -48px);
-      opacity: 1;
-    }
-    33% {
-      transform: translate(-32vw, -29px);
-      opacity: 1;
-    }
-    38% {
-      transform: translate(-42vw, 0);
-      opacity: 1;
-    }
-    41%, 100% {
-      transform: translate(-42vw, 0);
-      opacity: 0;
-    }
+    0% { transform: translate(0, 0); opacity: 0; }
+    5% { transform: translate(0, 0); opacity: 1; }
+    14% { transform: translate(-11vw, -27px); opacity: 1; }
+    24% { transform: translate(-22vw, -48px); opacity: 1; }
+    33% { transform: translate(-32vw, -29px); opacity: 1; }
+    38% { transform: translate(-42vw, 0); opacity: 1; }
+    41%, 100% { transform: translate(-42vw, 0); opacity: 0; }
   }
 }
+
