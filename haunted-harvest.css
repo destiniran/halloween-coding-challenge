@@ -47,11 +47,14 @@ body {
     linear-gradient(
       to bottom,
       #12081f 0%,
+      #70282c 12%,
+      #b52815 20%,
+      #fe620e 27%,
       #24123c 33.333%,
       #18496d 33.333%,
-      #18496d 66.666%,
+      #11334c 66.666%,
       #d6b57a 66.666%,
-      #d6b57a 100%
+      #8d7650 100%
     );
 }
 
@@ -65,6 +68,7 @@ body {
   height: 3px;
   background: rgba(255,255,255,0.28);
 }
+
 
 .ocean {
   position: absolute;
@@ -80,67 +84,42 @@ body {
   position: absolute;
   font-size: clamp(3rem, 5vw, 5rem);
   opacity: 0;
-  --flip: 1;
-  animation-name: waveRoam;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
 }
 
-.wave-1 {
-  top: 12%;
-  left: 6%;
-  --travel: 38vw;
-  --drift: -8px;
-  animation-duration: 12s;
-  animation-delay: 0s;
+.wave-1 { top: 10%; left: 4%; animation: waveRightShort 5.6s linear 0s infinite; }
+.wave-2 { top: 33%; right: 7%; animation: waveLeftMedium 7.4s linear 1.8s infinite; }
+.wave-3 { top: 61%; left: 20%; animation: waveRightLong 8.6s linear 4.1s infinite; }
+.wave-4 { top: 18%; right: 28%; animation: waveLeftShort 6.2s linear 6.3s infinite; }
+.wave-5 { top: 72%; left: 55%; animation: waveRightMedium 7.1s linear 8.2s infinite; }
+.wave-6 { top: 47%; right: 12%; animation: waveLeftLong 9.2s linear 10.5s infinite; }
+
+
+@keyframes waveRightShort {
+  0% { transform: translateX(0); opacity: 0; }
+  10% { opacity: 0.85; }
+  34% { transform: translateX(110px); opacity: 0.9; }
+  46%, 100% { transform: translateX(145px); opacity: 0; }
 }
 
-.wave-2 {
-  --flip: -1;
-  top: 50%;
-  left: 72%;
-  --travel: -44vw;
-  --drift: 7px;
-  animation-duration: 15s;
-  animation-delay: 3s;
+@keyframes waveRightMedium {
+  0% { transform: translateX(0); opacity: 0; }
+  12% { opacity: 0.8; }
+  36% { transform: translateX(170px); opacity: 0.9; }
+  48%, 100% { transform: translateX(215px); opacity: 0; }
 }
 
-.wave-3 {
-  top: 72%;
-  left: 32%;
-  --travel: 30vw;
-  --drift: -5px;
-  animation-duration: 13s;
-  animation-delay: 6s;
+@keyframes waveRightLong {
+  0% { transform: translateX(0); opacity: 0; }
+  10% { opacity: 0.75; }
+  38% { transform: translateX(230px); opacity: 0.9; }
+  50%, 100% { transform: translateX(285px); opacity: 0; }
 }
 
-.wave-4 {
-  --flip: -1;
-  top: 25%;
-  left: 58%;
-  --travel: -36vw;
-  --drift: 8px;
-  animation-duration: 16s;
-  animation-delay: 9s;
-}
-
-.wave-5 {
-  top: 62%;
-  left: 8%;
-  --travel: 48vw;
-  --drift: 5px;
-  animation-duration: 14s;
-  animation-delay: 12s;
-}
-
-.wave-6 {
-  --flip: -1;
-  top: 38%;
-  left: 80%;
-  --travel: -52vw;
-  --drift: -7px;
-  animation-duration: 17s;
-  animation-delay: 15s;
+@keyframes waveLeftShort {
+  0% { transform: translateX(0); opacity: 0; }
+  10% { opacity: 0.85; }
+  34% { transform: translateX(-105px); opacity: 0.9; }
+  46%, 100% { transform: translateX(-140px); opacity: 0; }
 }
 
 @keyframes waveRoam {
@@ -976,106 +955,173 @@ body {
   }
 
   .cannonball-right {
-    right: calc(10% + 64px);
-    top: calc(49% + 46px);
+    right: 30%;
   }
+}
 
-  .impact-left {
-    left: 10%;
-  }
-
-  .impact-right {
-    right: 10%;
-  }
-
-  .approach-left {
-    left: 10%;
-    top: 49%;
-  }
-
-  .approach-right {
-    right: 10%;
-    top: 49%;
-  }
-
-  @keyframes approachLeft {
-    from { left: 10%; }
-    to { left: 24%; }
-  }
-
-  @keyframes approachRight {
-    from { right: 10%; }
-    to { right: 24%; }
-  }
-
-  .banner-row {
-    font-size: 1.65rem;
-  }
-
-  .deck-title {
-    top: 1.7%;
-    font-size: 1.45rem;
-  }
-
-  .back-link {
-    top: auto;
-    bottom: 1rem;
+.sun {
+    position: absolute;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
-    padding: 0.55rem 0.8rem;
-    white-space: nowrap;
-  }
+    width: 140px;
+    height: 140px;
+    filter: drop-shadow(0 0 25px rgba(255, 40, 0, 0.8));
+}
 
-  .fighter {
-    font-size: clamp(1.5rem, 6vw, 2.2rem);
-  }
 
-  .battle-pair {
-    width: 45%;
-    height: 20%;
-  }
+.clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 27%;
+  overflow: hidden;
+}
 
-  .pair-one {
-    left: 3%;
-  }
 
-  .pair-two {
-    right: 3%;
-  }
+.cloud-1, .cloud-2, .cloud-3, .cloud-4 {
+  position: absolute;
+  font-size: 2rem;
+}
 
-  .pair-three {
-    left: 12%;
-    width: 76%;
-  }
 
-  .pair-four {
-    left: 3%;
-    width: 47%;
-  }
+.cloud-1 { top: 10%; animation: cloudDriftRight 25s linear infinite 0s;}
+.cloud-2 { top: 30%; animation: cloudDriftLeft 35s linear infinite -10s;}
+.cloud-3 { top: 55%; animation: cloudDriftRight 35s linear infinite -18s;}
+.cloud-4 { top: 75%; animation: cloudDriftLeft 40s linear infinite -5s;}
 
-  .pair-five {
-    right: 3%;
-    width: 47%;
-  }
 
-  @keyframes cannonLeft {
-    0% { transform: translate(0, 0); opacity: 0; }
-    5% { transform: translate(0, 0); opacity: 1; }
-    14% { transform: translate(11vw, -27px); opacity: 1; }
-    24% { transform: translate(22vw, -48px); opacity: 1; }
-    33% { transform: translate(32vw, -29px); opacity: 1; }
-    38% { transform: translate(42vw, 0); opacity: 1; }
-    41%, 100% { transform: translate(42vw, 0); opacity: 0; }
-  }
+@keyframes cloudDriftRight {
+  0% {transform: translateX(-120vw);}
+  100% {transform: translateX(120vw);}
+}
 
-  @keyframes cannonRight {
-    0% { transform: translate(0, 0); opacity: 0; }
-    5% { transform: translate(0, 0); opacity: 1; }
-    14% { transform: translate(-11vw, -27px); opacity: 1; }
-    24% { transform: translate(-22vw, -48px); opacity: 1; }
-    33% { transform: translate(-32vw, -29px); opacity: 1; }
-    38% { transform: translate(-42vw, 0); opacity: 1; }
-    41%, 100% { transform: translate(-42vw, 0); opacity: 0; }
-  }
+
+@keyframes cloudDriftLeft {
+  0% {transform: translateX(120vw);}
+  100% {transform: translateX(-120vw);}
+}
+
+/* bonfire  */
+.fire {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: auto;
+  z-index: 5;
+}
+
+
+/* skeleton  */
+.bones {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.skeleton {
+  position: absolute;
+  top: 75%;
+  font-size: 3rem;
+  z-index: 5;
+}
+
+
+.skeleton-1 {
+  left: 40%;
+}
+
+
+.skeleton-2 {
+  left: 56%;
+}
+
+
+/* crabs */
+.shellfish {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.crab {
+  position: absolute;
+  font-size: 2rem;
+  z-index: 5;
+}
+
+
+.crab-1 {
+  top: 82%;
+  left: 20%;
+  animation: crabCrawl 3s ease-in-out infinite alternate;
+}
+
+
+.crab-2 {
+  top: 88%;
+  left: 75%;
+  /* aniamtion duration is shorter and and delay */
+  animation: crabCrawl 2.5s ease-in-out infinite alternate -1s;
+}
+
+
+/* crab crawl animation */
+@keyframes crabCrawl {
+  0% {transform: translateX(0);}
+  100% {transform: translateX(25px);}
+}
+
+
+.pumpkin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 27%;
+}
+
+
+/* jack-o-laterns */
+.jack {
+  position: absolute;
+  font-size: 2rem;
+  z-index: 5;
+}
+
+
+.jack-1 {
+  top: 15%;
+  left: 20%;
+  animation: jackFloat 2s ease-in-out infinite alternate;
+}
+
+
+.jack-2 {
+  top: 40%;
+  left: 50%;
+  animation: jackFloat 3s ease-in-out infinite alternate -1s;
+}
+
+
+.jack-3 {
+  top: 25%;
+  left: 75%;
+  animation: jackFloat 3.5s ease-in-out infinite alternate -2s;
+}
+
+
+@keyframes jackFloat {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-12px);}
 }
 
