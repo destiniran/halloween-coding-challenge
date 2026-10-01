@@ -16,7 +16,7 @@ body {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -78,58 +78,91 @@ body {
 /* waves */
 .wave {
   position: absolute;
-  font-size: clamp(2rem, 3vw, 3.2rem);
+  font-size: clamp(3rem, 5vw, 5rem);
   opacity: 0;
+  --flip: 1;
+  animation-name: waveRoam;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
-.wave-1 { top: 10%; left: 4%; animation: waveRightShort 5.6s linear 0s infinite; }
-.wave-2 { top: 33%; right: 7%; animation: waveLeftMedium 7.4s linear 1.8s infinite; }
-.wave-3 { top: 61%; left: 20%; animation: waveRightLong 8.6s linear 4.1s infinite; }
-.wave-4 { top: 18%; right: 28%; animation: waveLeftShort 6.2s linear 6.3s infinite; }
-.wave-5 { top: 72%; left: 55%; animation: waveRightMedium 7.1s linear 8.2s infinite; }
-.wave-6 { top: 47%; right: 12%; animation: waveLeftLong 9.2s linear 10.5s infinite; }
-
-
-@keyframes waveRightShort {
-  0% { transform: translateX(0); opacity: 0; }
-  10% { opacity: 0.85; }
-  34% { transform: translateX(110px); opacity: 0.9; }
-  46%, 100% { transform: translateX(145px); opacity: 0; }
+.wave-1 {
+  top: 12%;
+  left: 6%;
+  --travel: 38vw;
+  --drift: -8px;
+  animation-duration: 12s;
+  animation-delay: 0s;
 }
 
-@keyframes waveRightMedium {
-  0% { transform: translateX(0); opacity: 0; }
-  12% { opacity: 0.8; }
-  36% { transform: translateX(170px); opacity: 0.9; }
-  48%, 100% { transform: translateX(215px); opacity: 0; }
+.wave-2 {
+  --flip: -1;
+  top: 50%;
+  left: 72%;
+  --travel: -44vw;
+  --drift: 7px;
+  animation-duration: 15s;
+  animation-delay: 3s;
 }
 
-@keyframes waveRightLong {
-  0% { transform: translateX(0); opacity: 0; }
-  10% { opacity: 0.75; }
-  38% { transform: translateX(230px); opacity: 0.9; }
-  50%, 100% { transform: translateX(285px); opacity: 0; }
+.wave-3 {
+  top: 72%;
+  left: 32%;
+  --travel: 30vw;
+  --drift: -5px;
+  animation-duration: 13s;
+  animation-delay: 6s;
 }
 
-@keyframes waveLeftShort {
-  0% { transform: translateX(0); opacity: 0; }
-  10% { opacity: 0.85; }
-  34% { transform: translateX(-105px); opacity: 0.9; }
-  46%, 100% { transform: translateX(-140px); opacity: 0; }
+.wave-4 {
+  --flip: -1;
+  top: 25%;
+  left: 58%;
+  --travel: -36vw;
+  --drift: 8px;
+  animation-duration: 16s;
+  animation-delay: 9s;
 }
 
-@keyframes waveLeftMedium {
-  0% { transform: translateX(0); opacity: 0; }
-  12% { opacity: 0.8; }
-  36% { transform: translateX(-165px); opacity: 0.9; }
-  48%, 100% { transform: translateX(-215px); opacity: 0; }
+.wave-5 {
+  top: 62%;
+  left: 8%;
+  --travel: 48vw;
+  --drift: 5px;
+  animation-duration: 14s;
+  animation-delay: 12s;
 }
 
-@keyframes waveLeftLong {
-  0% { transform: translateX(0); opacity: 0; }
-  10% { opacity: 0.75; }
-  38% { transform: translateX(-225px); opacity: 0.9; }
-  50%, 100% { transform: translateX(-280px); opacity: 0; }
+.wave-6 {
+  --flip: -1;
+  top: 38%;
+  left: 80%;
+  --travel: -52vw;
+  --drift: -7px;
+  animation-duration: 17s;
+  animation-delay: 15s;
+}
+
+@keyframes waveRoam {
+  0% {
+    transform: translate(0, 0) scaleX(var(--flip)) scale(0.9);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.85;
+  }
+  32% {
+    transform: translate(var(--travel), var(--drift)) scaleX(var(--flip)) scale(1);
+    opacity: 0.9;
+  }
+  42% {
+    transform: translate(var(--travel), 0) scaleX(var(--flip)) scale(1.05);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(var(--travel), 0) scaleX(var(--flip)) scale(1.05);
+    opacity: 0;
+  }
 }
 
 /* ships */
@@ -139,32 +172,34 @@ body {
   height: 90px;
   text-decoration: none;
   z-index: 5;
-  animation: shipRock 3s ease-in-out infinite;
 }
 
 .pirate-left {
   left: 18%;
   top: 48%;
+  --ship-flip: -1;
+  animation: shipLeftRock 8s ease-in-out infinite;
 }
 
 .pirate-right {
   right: 18%;
   top: 48%;
-  animation-delay: 0.8s;
+  --ship-flip: 1;
+  animation: shipRightRock 8s ease-in-out infinite;
 }
 
 .ship-body {
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scaleX(var(--ship-flip, 1));
   font-size: clamp(2.8rem, 4vw, 4rem);
 }
 
 .ship-flag {
   position: absolute;
-  top: -24px;
   left: 50%;
+  bottom: clamp(2.7rem, 4vw, 4.1rem);
   transform: translateX(-50%);
   font-size: clamp(1.5rem, 2vw, 2rem);
 }
@@ -178,15 +213,39 @@ body {
   outline-offset: 4px;
 }
 
-@keyframes shipRock {
-  0% {
+@keyframes shipLeftRock {
+  0%, 18%, 36%, 54%, 72%, 100% {
     transform: rotate(-2deg) translateY(0);
   }
-  50% {
-    transform: rotate(2deg) translateY(7px);
+  9%, 27%, 45%, 63%, 81% {
+    transform: rotate(2deg) translateY(6px);
   }
-  100% {
+  87% {
+    transform: rotate(-8deg) translate(-5px, 9px);
+  }
+  90% {
+    transform: rotate(7deg) translate(5px, 11px);
+  }
+  94% {
+    transform: rotate(-4deg) translateY(4px);
+  }
+}
+
+@keyframes shipRightRock {
+  0%, 18%, 54%, 72%, 90%, 100% {
     transform: rotate(-2deg) translateY(0);
+  }
+  9%, 27%, 45%, 63%, 81% {
+    transform: rotate(2deg) translateY(6px);
+  }
+  36% {
+    transform: rotate(8deg) translate(5px, 9px);
+  }
+  39% {
+    transform: rotate(-7deg) translate(-5px, 11px);
+  }
+  43% {
+    transform: rotate(4deg) translateY(4px);
   }
 }
 
@@ -199,18 +258,19 @@ body {
   background: #090909;
   box-shadow: 0 0 6px rgba(0,0,0,0.8);
   z-index: 6;
+  opacity: 0;
 }
 
 .cannonball-left {
-  left: 29%;
-  top: 53%;
-  animation: cannonLeft 4.2s linear infinite;
+  left: calc(18% + 68px);
+  top: calc(48% + 48px);
+  animation: cannonLeft 8s linear infinite;
 }
 
 .cannonball-right {
-  right: 29%;
-  top: 55%;
-  animation: cannonRight 4.2s linear infinite 2.1s;
+  right: calc(18% + 68px);
+  top: calc(48% + 48px);
+  animation: cannonRight 8s linear 4s infinite;
 }
 
 @keyframes cannonLeft {
@@ -218,19 +278,28 @@ body {
     transform: translate(0, 0);
     opacity: 0;
   }
-  8% {
+  5% {
+    transform: translate(0, 0);
     opacity: 1;
   }
-  50% {
-    transform: translate(240px, -65px);
+  14% {
+    transform: translate(15vw, -40px);
     opacity: 1;
   }
-  60% {
-    transform: translate(280px, -20px);
-    opacity: 0;
+  24% {
+    transform: translate(30vw, -72px);
+    opacity: 1;
   }
-  100% {
-    transform: translate(280px, -20px);
+  33% {
+    transform: translate(45vw, -44px);
+    opacity: 1;
+  }
+  38% {
+    transform: translate(58vw, 0);
+    opacity: 1;
+  }
+  41%, 100% {
+    transform: translate(58vw, 0);
     opacity: 0;
   }
 }
@@ -240,19 +309,28 @@ body {
     transform: translate(0, 0);
     opacity: 0;
   }
-  8% {
+  5% {
+    transform: translate(0, 0);
     opacity: 1;
   }
-  50% {
-    transform: translate(-240px, -65px);
+  14% {
+    transform: translate(-15vw, -40px);
     opacity: 1;
   }
-  60% {
-    transform: translate(-280px, -20px);
-    opacity: 0;
+  24% {
+    transform: translate(-30vw, -72px);
+    opacity: 1;
   }
-  100% {
-    transform: translate(-280px, -20px);
+  33% {
+    transform: translate(-45vw, -44px);
+    opacity: 1;
+  }
+  38% {
+    transform: translate(-58vw, 0);
+    opacity: 1;
+  }
+  41%, 100% {
+    transform: translate(-58vw, 0);
     opacity: 0;
   }
 }
@@ -261,33 +339,37 @@ body {
   position: absolute;
   font-size: 1.8rem;
   opacity: 0;
-  z-index: 6;
+  z-index: 8;
 }
 
 .impact-left {
-  right: 22%;
-  top: 50%;
-  animation: hitFlash 4.2s ease-in-out infinite;
+  left: 18%;
+  top: 52%;
+  animation: hitFlash 8s ease-in-out 4s infinite;
 }
 
 .impact-right {
-  left: 22%;
-  top: 50%;
-  animation: hitFlash 4.2s ease-in-out infinite 2.1s;
+  right: 18%;
+  top: 52%;
+  animation: hitFlash 8s ease-in-out infinite;
 }
 
 @keyframes hitFlash {
-  0%, 48% {
+  0%, 34% {
     opacity: 0;
     transform: scale(0.3);
   }
-  54% {
+  37% {
     opacity: 1;
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
-  64% {
+  41% {
+    opacity: 1;
+    transform: scale(1.6);
+  }
+  46% {
     opacity: 0;
-    transform: scale(1.8);
+    transform: scale(2);
   }
   100% {
     opacity: 0;
@@ -329,6 +411,550 @@ body {
   to { transform: translateY(9px) rotate(4deg); }
 }
 
+/* pirate transition */
+.pirate-transition-scene,
+.pirate-battle-scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.pirate-transition-scene {
+  background:
+    linear-gradient(
+      to bottom,
+      #12081f 0%,
+      #24123c 33.333%,
+      #18496d 33.333%,
+      #18496d 66.666%,
+      #d6b57a 66.666%,
+      #d6b57a 100%
+    );
+}
+
+.pirate-transition-scene::after {
+  content: "";
+  position: absolute;
+  top: 33.333%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.28);
+}
+
+.approach-ship {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  top: 48%;
+  z-index: 4;
+}
+
+.approach-left {
+  left: 18%;
+  --ship-flip: -1;
+  animation: approachLeft 1.2s ease-in forwards;
+}
+
+.approach-right {
+  right: 18%;
+  --ship-flip: 1;
+  animation: approachRight 1.2s ease-in forwards;
+}
+
+.approach-ship .ship-body {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) scaleX(var(--ship-flip));
+  font-size: clamp(2.8rem, 4vw, 4rem);
+}
+
+.approach-ship .ship-flag {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(2.7rem, 4vw, 4.1rem);
+  transform: translateX(-50%);
+  font-size: clamp(1.5rem, 2vw, 2rem);
+}
+
+@keyframes approachLeft {
+  from { left: 18%; }
+  to { left: 32%; }
+}
+
+@keyframes approachRight {
+  from { right: 18%; }
+  to { right: 32%; }
+}
+
+.battle-banner {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 0;
+  text-decoration: none;
+  color: var(--ghost-white);
+  background: rgba(12, 5, 20, 0.82);
+  opacity: 0;
+  animation: bannerReveal 1.4s ease 1.05s forwards;
+}
+
+@keyframes bannerReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.banner-row {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  color: var(--pumpkin);
+  text-shadow: 0 0 10px rgba(255, 214, 10, 0.35);
+}
+
+.banner-row-top {
+  transform: rotate(-2deg);
+}
+
+.banner-row-bottom {
+  transform: rotate(2deg);
+}
+
+.skull-strip {
+  display: flex;
+  width: max-content;
+}
+
+.skull-track {
+  flex: none;
+  padding-right: 1.4rem;
+  word-spacing: 1rem;
+}
+
+.banner-row-top .skull-strip {
+  animation: skullLeft 9s linear infinite;
+}
+
+.banner-row-bottom .skull-strip {
+  animation: skullRight 9s linear infinite;
+}
+
+@keyframes skullLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes skullRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.banner-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.battle-kicker {
+  margin: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--candle-glow);
+}
+
+.banner-center h2,
+.deck-title,
+.battle-reveal p {
+  font-family: "Creepster", cursive;
+  letter-spacing: 0.05em;
+}
+
+.banner-center h2 {
+  margin: 0;
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  font-weight: normal;
+  color: var(--ghost-white);
+  text-shadow: 0 0 18px rgba(90, 24, 154, 0.9);
+}
+
+.battle-enter {
+  padding: 0.65rem 1.1rem;
+  border: 2px solid var(--pumpkin);
+  border-radius: 999px;
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  color: var(--ghost-white);
+  background: rgba(255, 117, 24, 0.16);
+}
+
+/* battle deck */
+.pirate-battle-scene {
+  background: #2d160b;
+}
+
+.ship-deck {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #8a542d 0 54px,
+      #5f351c 54px 58px
+    );
+  box-shadow: inset 0 0 90px rgba(20, 7, 3, 0.65);
+}
+
+.ship-deck::before,
+.ship-deck::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  z-index: 2;
+  background: #4a2814;
+  border: 4px solid #2d160b;
+  box-sizing: border-box;
+}
+
+.ship-deck::before {
+  top: 7%;
+}
+
+.ship-deck::after {
+  bottom: 7%;
+}
+
+.deck-title {
+  position: absolute;
+  top: 1.3%;
+  left: 50%;
+  z-index: 4;
+  transform: translateX(-50%);
+  font-size: clamp(1.7rem, 3vw, 2.7rem);
+  color: var(--candle-glow);
+  text-shadow: 2px 2px 0 #2d160b;
+  white-space: nowrap;
+}
+
+.back-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 30;
+  padding: 0.65rem 1rem;
+  border: 2px solid var(--candle-glow);
+  border-radius: 999px;
+  font-family: "Poppins", Arial, sans-serif;
+  color: var(--ghost-white);
+  background: rgba(26, 20, 35, 0.9);
+  text-decoration: none;
+}
+
+.back-link:hover,
+.back-link:focus {
+  border-color: var(--pumpkin);
+  outline: 3px solid var(--ghost-white);
+  outline-offset: 3px;
+}
+
+.battle-pair {
+  position: absolute;
+  width: 38%;
+  height: 22%;
+  z-index: 8;
+}
+
+.fighter {
+  position: absolute;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+}
+
+.effect {
+  position: absolute;
+  opacity: 0;
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+}
+
+/* chase */
+.pair-one {
+  left: 6%;
+  top: 15%;
+}
+
+.h1 {
+  left: 10%;
+  top: 40%;
+  animation: humanChase 8s linear infinite;
+}
+
+.sk1 {
+  left: 2%;
+  top: 40%;
+  animation: skeletonChase 8s linear infinite;
+}
+
+@keyframes humanChase {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(10vw, -5vh); }
+  40% { transform: translate(20vw, -1vh); }
+  60% { transform: translate(18vw, 7vh); }
+  80% { transform: translate(6vw, 8vh); }
+}
+
+@keyframes skeletonChase {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(9vw, -4vh); }
+  40% { transform: translate(19vw, -1vh); }
+  60% { transform: translate(18vw, 6vh); }
+  80% { transform: translate(6vw, 7vh); }
+}
+
+/* circle */
+.pair-two {
+  right: 6%;
+  top: 16%;
+}
+
+.h2 {
+  left: 12%;
+  top: 40%;
+  animation: humanCircle 9s linear infinite;
+}
+
+.sk2 {
+  right: 12%;
+  top: 40%;
+  animation: skeletonCircle 9s linear infinite;
+}
+
+@keyframes humanCircle {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(7vw, -7vh); }
+  50% { transform: translate(14vw, -3vh); }
+  75% { transform: translate(7vw, 7vh); }
+}
+
+@keyframes skeletonCircle {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-7vw, 7vh); }
+  50% { transform: translate(-14vw, 3vh); }
+  75% { transform: translate(-7vw, -7vh); }
+}
+
+/* lunge and dodge */
+.pair-three {
+  left: 23%;
+  top: 41%;
+  width: 54%;
+}
+
+.h3 {
+  left: 25%;
+  top: 40%;
+  animation: humanDodge 8s ease-in-out infinite;
+}
+
+.sk3 {
+  right: 15%;
+  top: 40%;
+  animation: skeletonLunge 8s ease-in-out infinite;
+}
+
+.dodge-mark {
+  left: 28%;
+  top: 20%;
+  animation: dodgeMark 8s ease-in-out infinite;
+}
+
+@keyframes humanDodge {
+  0%, 36%, 100% { transform: translate(0, 0); }
+  44% { transform: translate(2vw, -9vh); }
+  56% { transform: translate(2vw, -9vh); }
+  72% { transform: translate(0, 0); }
+}
+
+@keyframes skeletonLunge {
+  0%, 34%, 100% { transform: translate(0, 0); }
+  46% { transform: translate(-28vw, 0); }
+  56% { transform: translate(-30vw, 1vh); }
+  72% { transform: translate(-8vw, 1vh); }
+}
+
+@keyframes dodgeMark {
+  0%, 32%, 58%, 100% { opacity: 0; }
+  38%, 48% { opacity: 1; transform: scale(1.35); }
+}
+
+/* defeat */
+.pair-four {
+  left: 7%;
+  bottom: 11%;
+  width: 42%;
+}
+
+.h4 {
+  left: 7%;
+  top: 35%;
+  animation: humanDefeat 5s ease-in-out 1 forwards;
+}
+
+.sk4 {
+  right: 4%;
+  top: 30%;
+  animation:
+    skeletonWinMove 5s ease-in-out 1 forwards,
+    winnerJump 0.65s ease-in-out 4.2s infinite alternate;
+}
+
+.defeat-mark {
+  left: 50%;
+  top: 50%;
+  animation: defeatFlash 5s ease-in-out 1 forwards;
+}
+
+@keyframes humanDefeat {
+  0%, 25% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  48% {
+    transform: translate(12vw, 1vh) rotate(0deg);
+  }
+  62% {
+    transform: translate(14vw, 5vh) rotate(80deg);
+  }
+  100% {
+    transform: translate(14vw, 7vh) rotate(90deg);
+    opacity: 0.72;
+  }
+}
+
+@keyframes skeletonWinMove {
+  0%, 30% { transform: translate(0, 0); }
+  55% { transform: translate(-13vw, 1vh); }
+  72% { transform: translate(-21vw, 2vh); }
+  100% { transform: translate(-21vw, 2vh); }
+}
+
+@keyframes defeatFlash {
+  0%, 48% { opacity: 0; }
+  55% { opacity: 1; transform: scale(1.3); }
+  65%, 100% { opacity: 0; }
+}
+
+@keyframes winnerJump {
+  from { margin-top: 0; }
+  to { margin-top: -24px; }
+}
+
+/* circle and clash */
+.pair-five {
+  right: 6%;
+  bottom: 12%;
+  width: 42%;
+}
+
+.h5 {
+  left: 10%;
+  top: 38%;
+  animation: clashHumanCircle 9s linear infinite;
+}
+
+.sk5 {
+  right: 10%;
+  top: 38%;
+  animation: clashSkeletonCircle 9s linear infinite;
+}
+
+.clash-five {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: clashFlash 9s ease-in-out infinite;
+}
+
+@keyframes clashHumanCircle {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(8vw, -6vh); }
+  35% { transform: translate(16vw, 0); }
+  50% { transform: translate(11vw, 7vh); }
+  70% { transform: translate(16vw, 0); }
+  85% { transform: translate(6vw, -5vh); }
+}
+
+@keyframes clashSkeletonCircle {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-8vw, 6vh); }
+  35% { transform: translate(-16vw, 0); }
+  50% { transform: translate(-11vw, -7vh); }
+  70% { transform: translate(-16vw, 0); }
+  85% { transform: translate(-6vw, 5vh); }
+}
+
+@keyframes clashFlash {
+  0%, 30%, 40%, 65%, 75%, 100% {
+    opacity: 0;
+  }
+  35%, 70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+}
+
+/* reveal */
+.battle-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--ghost-white);
+  background: rgba(12, 5, 20, 0.96);
+  animation: revealBattle 1.5s ease 0.2s forwards;
+  pointer-events: none;
+}
+
+.battle-reveal p {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 5rem);
+  color: var(--ghost-white);
+  text-shadow: 0 0 18px rgba(90, 24, 154, 0.9);
+}
+
+.reveal-skulls {
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  word-spacing: 0.8rem;
+  color: var(--pumpkin);
+}
+
+@keyframes revealBattle {
+  0%, 35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* mobile */
 @media (max-width: 700px) {
   .pirate-left {
     left: 10%;
@@ -341,14 +967,115 @@ body {
   }
 
   .ship-flag {
-    top: -20px;
+    bottom: 2.7rem;
   }
 
   .cannonball-left {
-    left: 30%;
+    left: calc(10% + 64px);
+    top: calc(49% + 46px);
   }
 
   .cannonball-right {
-    right: 30%;
+    right: calc(10% + 64px);
+    top: calc(49% + 46px);
+  }
+
+  .impact-left {
+    left: 10%;
+  }
+
+  .impact-right {
+    right: 10%;
+  }
+
+  .approach-left {
+    left: 10%;
+    top: 49%;
+  }
+
+  .approach-right {
+    right: 10%;
+    top: 49%;
+  }
+
+  @keyframes approachLeft {
+    from { left: 10%; }
+    to { left: 24%; }
+  }
+
+  @keyframes approachRight {
+    from { right: 10%; }
+    to { right: 24%; }
+  }
+
+  .banner-row {
+    font-size: 1.65rem;
+  }
+
+  .deck-title {
+    top: 1.7%;
+    font-size: 1.45rem;
+  }
+
+  .back-link {
+    top: auto;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.55rem 0.8rem;
+    white-space: nowrap;
+  }
+
+  .fighter {
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+  }
+
+  .battle-pair {
+    width: 45%;
+    height: 20%;
+  }
+
+  .pair-one {
+    left: 3%;
+  }
+
+  .pair-two {
+    right: 3%;
+  }
+
+  .pair-three {
+    left: 12%;
+    width: 76%;
+  }
+
+  .pair-four {
+    left: 3%;
+    width: 47%;
+  }
+
+  .pair-five {
+    right: 3%;
+    width: 47%;
+  }
+
+  @keyframes cannonLeft {
+    0% { transform: translate(0, 0); opacity: 0; }
+    5% { transform: translate(0, 0); opacity: 1; }
+    14% { transform: translate(11vw, -27px); opacity: 1; }
+    24% { transform: translate(22vw, -48px); opacity: 1; }
+    33% { transform: translate(32vw, -29px); opacity: 1; }
+    38% { transform: translate(42vw, 0); opacity: 1; }
+    41%, 100% { transform: translate(42vw, 0); opacity: 0; }
+  }
+
+  @keyframes cannonRight {
+    0% { transform: translate(0, 0); opacity: 0; }
+    5% { transform: translate(0, 0); opacity: 1; }
+    14% { transform: translate(-11vw, -27px); opacity: 1; }
+    24% { transform: translate(-22vw, -48px); opacity: 1; }
+    33% { transform: translate(-32vw, -29px); opacity: 1; }
+    38% { transform: translate(-42vw, 0); opacity: 1; }
+    41%, 100% { transform: translate(-42vw, 0); opacity: 0; }
   }
 }
+
